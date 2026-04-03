@@ -1,37 +1,18 @@
-def ampel(farbe): 
-    
-    if farbe == "red":
+from telegram import Update
+from telegram.ext import ApplicationBuilder, CommandHandler, ContextTypes, filters
 
-        print("Wait three secs")
+TOKEN = "####"
 
-    elif farbe == "green":
+async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    await update.message.reply_text("Hello! I'm your bot 🤖")
 
-        print("Wait two sec")  
+async def name(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    print("Hello")
+    await update.message.reply_text("Your name is ...? ")
 
-    else: 
+app = ApplicationBuilder().token(TOKEN).build()
 
-        print("Wrong color") 
+app.add_handler(CommandHandler("start", start))
+app.add_handler(CommandHandler("yourname", name, filters=filters.Regex("(?i)^/yourname$")))
 
-attemps = 4 
-
-while attemps > 0 :   
-
-    farbe = input("Enter yor guess: ") 
-
-    if farbe == "green"  or farbe == "red": 
-
-        ampel(farbe) 
-
-        break 
-
-    else: 
-
-        attemps -= 1 
-
-        print(f"You have {attemps} attemps left!") 
-
-if attemps == 0: 
-
-  print("bye!")
-
-
+app.run_polling()

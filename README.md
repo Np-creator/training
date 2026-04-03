@@ -1,7 +1,2 @@
 # training
-# training
-# training
-# training
-# training
-# training
-# training
+# I wanna build a Telegram bot
